@@ -1,12 +1,19 @@
-// Test: Select id="ghx-header"
-console.log("Howdy");
-
-let header = document.querySelector('#ghx-header');
-console.log('header => ', header);
-header.style.backgroundColor = '#e5e5e5';
+const labelColors = {
+    'qa-by-devs': 'red',
+    'no-qa-needed': 'blue',
+    'qa-seperate': 'purple',
+    'qa-story': 'green',
+    'ip-suggestion': 'darkorange'
+};
 
 let labels = document.querySelectorAll('[data-tooltip*="Labels:"]:not(.ghx-fa)');
-console.log('labels => ', labels);
 labels.forEach(label => {
-    label.style.color = "red";
+    let labelProp = label.dataset.tooltip;
+    let labelText = labelProp.split('Labels: ')[1].toLowerCase();
+    // label.classList.add(labelText); // Not Really Needed
+    label.style.color = setLabelColor(labelText);
 });
+
+function setLabelColor(label) {
+    return labelColors[label] ?? '';
+}

@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Jira UX Formatter",
+    "description": "Format some of Jira's pages to make it easier to read.",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": "images/hello_extensions.png"
+    },
+    "content_scripts": [
+        {
+            "js": ["scripts/content.js"],
+            "matches": [
+                "https://*.atlassian.net/jira/*"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["scripting"]
+}

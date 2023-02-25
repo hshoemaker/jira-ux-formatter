@@ -1,1 +1,1 @@
-# jira-ux-formatter
+# Jira UX Formatter

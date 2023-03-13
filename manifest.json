@@ -12,11 +12,12 @@
             "js": ["scripts/content.js"],
             "matches": [
                 "https://*.atlassian.net/jira/*"
-            ]
+            ],
+            "run_at": "document_end"
         }
     ],
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["scripting"]
+    "permissions": ["scripting", "storage"]
 }

@@ -1,3 +1,8 @@
+// ======================= Dynamic Label Colors ======================================
+
+
+
+// ======================= Static Label Colors ======================================
 let setButton = document.querySelectorAll('.set-color');
 let removeButton = document.querySelectorAll('.remove-color');
 

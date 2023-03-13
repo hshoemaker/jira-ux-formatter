@@ -1,5 +1,9 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
 
+body {
+    width: 33rem;
+}
+
 h1 {
     color: teal;
 }

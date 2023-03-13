@@ -8,12 +8,40 @@
     </head>
     <body>
         <section class="section">
+            <h1 class="title is-3">Jira UX Formatter</h1>
             <div class="container">
-                <h1 class="title">Jira UX Formatter</h1>
-                <button class="button is-primary set-color">Set Color</button>
-                <button class="button remove-color">Remove Color</button>
+                <h2 class="title is-4">Set Colors</h2>
+                <form class="">
+                    <div class="field is-grouped">
+                        <div class="control is-expanded">
+                            <input class="input" type="text" placeholder="Label" id="Label1" title="Label1" name="Label1" />
+                        </div>
+                        <div class="control is-expanded">
+                            <input class="input" type="text" placeholder="Color" id="Color1" title="Color1" name="Color1" />
+                            <!-- <div class="select">
+                                <select>
+                                    <option>Red</option>
+                                    <option>Blue</option>
+                                </select>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="field is-grouped is-grouped-right">
+                        <p class="control">
+                            <button class="button is-primary set-color">Save</button>
+                        </p>
+                        <p class="control">
+                            <button class="button remove-color">Cancel</button>
+                        </p>
+                    </div>
+                </form>
             </div>
         </section>
+        <footer class="footer">
+            <div class="content has-text-centered">
+                Built by <strong>Harry Shoemaker</strong> using <strong>Bulma</strong>.
+            </div>
+        </footer>
     </body>
 </html>
 

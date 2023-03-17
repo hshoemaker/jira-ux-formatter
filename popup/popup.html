@@ -9,15 +9,18 @@
     <body>
         <section class="section">
             <h1 class="title is-3">Jira UX Formatter</h1>
+            <div class="notification is-info box">
+                This is still in development and some features may not be fully functioning.
+            </div>
             <div class="container">
-                <h2 class="title is-4">Set Colors</h2>
+                <h2 class="title is-4 has-text-grey-dark">Label Colors</h2>
                 <form class="">
                     <div class="field is-grouped">
                         <div class="control is-expanded">
-                            <input class="input" type="text" placeholder="Label" id="Label1" title="Label1" name="Label1" />
+                            <input class="input" type="text" placeholder="Label" id="LabelInput" title="Label1" name="Label1" />
                         </div>
                         <div class="control is-expanded">
-                            <input class="input" type="text" placeholder="Color" id="Color1" title="Color1" name="Color1" />
+                            <input class="input" type="text" placeholder="Color" id="ColorInput" title="Color1" name="Color1" />
                             <!-- <div class="select">
                                 <select>
                                     <option>Red</option>
@@ -25,16 +28,37 @@
                                 </select>
                             </div> -->
                         </div>
+                        <div class="control">
+                            <!-- ToDo: Set type to submit -->
+                            <button class="button is-primary has-background-primary-dark save-color">Save</button>
+                        </div>
                     </div>
-                    <div class="field is-grouped is-grouped-right">
+                    <!-- <div class="field is-grouped is-grouped-right">
                         <p class="control">
                             <button class="button is-primary set-color">Save</button>
                         </p>
                         <p class="control">
                             <button class="button remove-color">Cancel</button>
                         </p>
-                    </div>
+                    </div> -->
                 </form>
+                <br />
+                <div class="label-colors-list-container">
+                    <!-- <h2 class="title is-4">Label Colors</h2> -->
+                    <table class="table is-hoverable is-fullwidth">
+                        <thead>
+                            <tr class="has-background-primary-dark">
+                                <th class="has-text-white-ter">Label</th>
+                                <th class="has-text-white-ter">Color</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
         <footer class="footer">

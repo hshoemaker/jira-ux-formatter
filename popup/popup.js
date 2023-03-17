@@ -1,52 +1,97 @@
-// ======================= Dynamic Label Colors ======================================
+// ======================= Label Colors ======================================
+const labelColorListContainer = document.querySelector('.label-colors-list-container tbody');
+const formInputLabel = document.querySelector('#LabelInput');
+const formInputColor = document.querySelector('#ColorInput');
+const formButtonSave = document.querySelector('.save-color');
 
+let labelColorsValue = {};
 
+// Load the list of Labels and Colors in the DOM
+function loadLabelColorList() {
+    // Clear the existing label color list
+    labelColorListContainer.innerHTML = '';
 
-// ======================= Static Label Colors ======================================
-let setButton = document.querySelectorAll('.set-color');
-let removeButton = document.querySelectorAll('.remove-color');
+    Object.entries(labelColorsValue).forEach((labelColor) => {
+        const [key, value] = labelColor;
+    
+        // Create Elements
+        let tableTr = document.createElement('tr');
+        let tableTdLabel = document.createElement('td');
+        let tableTdColor = document.createElement('td');
+        let tableTdEdit = document.createElement('td');
+        let tableTdDelete = document.createElement('td');
+        let tableTdEditButton = document.createElement('button');
+        let tableTdDeleteButton = document.createElement('button');
+    
+        // Hydrate the Elements
+        tableTdEditButton.innerHTML = 'Edit';
+        tableTdEditButton.classList.add('button', 'is-primary', 'is-small', 'is-light');
+        tableTdEditButton.addEventListener('click', () => {
+            editLabelColor(key, value);
+        });
+        tableTdDeleteButton.classList.add('delete');
+        tableTdDeleteButton.addEventListener('click', () => {
+            deleteLabelColor(key);
+        });
+        tableTdColor.innerHTML = value;
+        tableTdLabel.innerHTML = key;
 
-let values = {
-    'qa-by-devs': 'red',
-    'no-qa-needed': 'blue',
-    'qa-seperate': 'purple',
-    'qa-story': 'green',
-    'ip-suggestion': 'darkorange'
-};
-
-// function storeColorChoice() {
-//     chrome.storage.sync.set({ labelColor: 'blue' }).then(() => {
-//         console.log('stored the color');
-//     });
-// }
-
-// function storeColorChoice2() {
-//     chrome.storage.sync.set({ labelColor: 'red' }).then(() => {
-//         console.log('stored the color');
-//     });
-// }
-
-function storeLabelColors() {
-    values["no-qa-needed"] = 'blue';
-    chrome.storage.sync.set({ labelColors: values}).then(() => {
-        console.log('stored hard coded label colors object');
+        // Connect the Elments
+        tableTdEdit.append(tableTdEditButton);
+        tableTdDelete.append(tableTdDeleteButton);
+        tableTr.append(tableTdLabel);
+        tableTr.append(tableTdColor);
+        tableTr.append(tableTdEdit);
+        tableTr.append(tableTdDelete);
+        tableTr.classList.add('level');
+        tableTr.style.color = value;
+    
+        // Add it to the DOM
+        labelColorListContainer.append(tableTr);
     });
 }
 
-function updateLabelColors() {
-    values["no-qa-needed"] = 'green';
-    chrome.storage.sync.set({ labelColors: values}).then(() => {
-        console.log('updated hard coded label colors object');
+// Click function for editing a label color
+function editLabelColor(label, color) {
+    populateAddField(label, color);
+}
+
+// Click funtion for deleting a label color
+function deleteLabelColor(label) {
+    delete labelColorsValue[label];
+    storeLabelColor();
+}
+
+// Populats the add label color form fields
+function populateAddField(label, color) {
+    formInputColor.value = color;
+    formInputLabel.value = label;
+}
+
+// Click function for saving a label color
+function saveLabelColor() {
+    labelColorsValue[formInputLabel.value] = formInputColor.value;
+    storeLabelColor();
+}
+
+// Stores the label colors using the Chrome Storage API
+function storeLabelColor() {
+    chrome.storage.sync.set({ labelColors: labelColorsValue}).then(() => {
+        loadLabelColorList();
     });
 }
 
-storeLabelColors();
+// Initializes the page functionality
+async function init() {
+    // Load the label colors from Chrome Storage API
+    await chrome.storage.sync.get('labelColors').then((result) => {
+        labelColorsValue = result['labelColors'] ?? {};
+        loadLabelColorList();
+    });
 
-// console.log(setButton);
-setButton.forEach((setBtn) => {
-    setBtn.addEventListener('click', storeLabelColors);
-});
+    // Set form funcionality
+    formButtonSave.addEventListener('click', saveLabelColor); // ToDo: Change this to be on form submit
+}
 
-removeButton.forEach((setBtn) => {
-    setBtn.addEventListener('click', updateLabelColors);
-});
+// Initializing after the DOM Loads
+document.addEventListener('DOMContentLoaded', init, false);
